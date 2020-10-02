@@ -16,7 +16,7 @@
 #include "iot_i2c.h"
 #include "esp_log.h"
 #include "esp_err.h"
-#include "driver/i2c.h"
+#include "driver/esp32/i2c.h"
 #include "iot_board_gpio.h"
 #include "freertos/timers.h"
 
