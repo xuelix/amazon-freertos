@@ -211,7 +211,8 @@ TEST( Full_OTA_PAL, prvPAL_CloseFile_ValidSignature )
 
     /* We use a dummy file name here because closing the system designated bootable
      * image with content that is not runnable may cause issues. */
-    xOtaFile.pucFilePath = ( uint8_t * ) ( "test_happy_path_image.bin" );
+    xOtaFile.pucFilePath = ( uint8_t * ) ( "/sys/test_happy_path_image.bin" );
+    //xOtaFile.pucFilePath = ( uint8_t * ) otatestpalFIRMWARE_FILE;
     xOtaFile.ulFileSize = sizeof( ucDummyData );
     xOtaStatus = prvPAL_CreateFileForRx( &xOtaFile );
     TEST_ASSERT_EQUAL( kOTA_Err_None, xOtaStatus );
