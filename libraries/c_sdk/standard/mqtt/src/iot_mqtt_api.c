@@ -1380,9 +1380,10 @@ IotMqttError_t IotMqtt_Connect( const IotMqttNetworkInfo_t * pNetworkInfo,
     }
     else
     {
-        IotLogInfo( "New MQTT connection %p established.", pMqttConnection );
+        IotLogInfo( "New MQTT connection %p established. old connection %p", newMqttConnection, pMqttConnection );
         /* Set the output parameter. */
         *pMqttConnection = newMqttConnection;
+        
     }
 
     IOT_FUNCTION_CLEANUP_END();
