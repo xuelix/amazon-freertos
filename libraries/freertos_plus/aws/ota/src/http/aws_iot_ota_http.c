@@ -46,9 +46,9 @@
 
 /* Logging includes. */
 #ifdef IOT_LOG_LEVEL_GLOBAL
-    #define LIBRARY_LOG_LEVEL    IOT_LOG_LEVEL_GLOBAL
+    #define LIBRARY_LOG_LEVEL    IOT_LOG_DEBUG //IOT_LOG_LEVEL_GLOBAL
 #else
-    #define LIBRARY_LOG_LEVEL    IOT_LOG_INFO
+    #define LIBRARY_LOG_LEVEL    IOT_LOG_DEBUG
 #endif
 #define LIBRARY_LOG_NAME         ( "OTA" )
 #include "iot_logging_setup.h"
