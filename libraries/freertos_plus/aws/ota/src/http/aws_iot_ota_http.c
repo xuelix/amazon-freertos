@@ -435,6 +435,12 @@ static void _httpReadReadyCallback( void * pPrivateData,
     /* Buffer to read the "Connection" field in HTTP header. */
     char connectionValueStr[ HTTP_HEADER_CONNECTION_VALUE_MAX_LEN ] = { 0 };
 
+    /* Return if the job is aborted or stopped. */
+    if( _httpDownloader.pAgentCtx == NULL || _httpDownloader.pAgentCtx->eState == eOTA_AgentState_Stopped )
+    {
+        return;
+    }
+
     /* A response is received from the server, setting the state to processing response. */
     _httpDownloader.state = OTA_HTTP_PROCESSING_RESPONSE;
 
@@ -532,8 +538,8 @@ static void _httpResponseCompleteCallback( void * pPrivateData,
     /* OTA Event. */
     OTA_EventMsg_t eventMsg = { 0 };
 
-    /* Bail out if this callback is invoked after the OTA agent is stopped. */
-    if( _httpDownloader.pAgentCtx->eState == eOTA_AgentState_Stopped )
+    /* Bail out if this callback is invoked after the OTA agent is stopped or aborted. */
+    if( _httpDownloader.pAgentCtx == NULL || _httpDownloader.pAgentCtx->eState == eOTA_AgentState_Stopped )
     {
         return;
     }
