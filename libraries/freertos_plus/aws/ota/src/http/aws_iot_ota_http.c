@@ -505,8 +505,8 @@ static void _httpReadReadyCallback( void * pPrivateData,
         /* Check if the server returns a response with connection field set to "close". */
         if( strncmp( "close", connectionValueStr, sizeof( "close" ) ) == 0 )
         {
-            IotLogInfo( "Connection has been closed by the HTTP server, reconnecting to the server..." );
-            _httpReconnect();
+            IotLogInfo( "Connection has been closed by the HTTP server, reconnect in next request." );
+            _httpDownloader.err = OTA_HTTP_ERR_NEED_RECONNECT;
         }
     }
 
@@ -614,8 +614,8 @@ static void _httpConnectionClosedCallback( void * pPrivateData,
     ( void ) connectionHandle;
     ( void ) returnCode;
 
-    IotLogInfo( "Connection has been closed by the HTTP client due to an error, reconnecting to the server..." );
-    _httpReconnect();
+    IotLogInfo( "Connection has been closed by the HTTP server, reconnect in next request." );
+    _httpDownloader.err = OTA_HTTP_ERR_NEED_RECONNECT;
 }
 
 static IotHttpsReturnCode_t _httpInitUrl( const char * pURL )
