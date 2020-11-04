@@ -946,8 +946,12 @@ OTA_Err_t _AwsIotOTA_InitFileTransfer_HTTP( OTA_AgentContext_t * pAgentCtx )
     /* OTA download file size from the HTTP server, this should match otaFileSize. */
     uint32_t httpFileSize = 0;
 
-    /* Store the OTA agent for later access. */
+    /* Initialize http downloader. */
     _httpDownloader.pAgentCtx = pAgentCtx;
+    _httpDownloader.state = OTA_HTTP_IDLE;
+    _httpDownloader.err = OTA_HTTP_ERR_NONE;
+    _httpDownloader.currBlock = 0;
+    _httpDownloader.currBlockSize = 0;
 
     if( fileContext == NULL )
     {
@@ -1183,7 +1187,11 @@ OTA_Err_t _AwsIotOTA_CleanupData_HTTP( OTA_AgentContext_t * pAgentCtx )
     /* Unused parameters. */
     ( void ) pAgentCtx;
 
-    memset( &_httpDownloader, 0, sizeof( _httpDownloader_t ) );
+    /* Reset downloader state and progress tracker. */
+    _httpDownloader.state = OTA_HTTP_IDLE;
+    _httpDownloader.err = OTA_HTTP_ERR_NONE;
+    _httpDownloader.currBlock = 0;
+    _httpDownloader.currBlockSize = 0;
 
     _httpFreeBuffers();
 
