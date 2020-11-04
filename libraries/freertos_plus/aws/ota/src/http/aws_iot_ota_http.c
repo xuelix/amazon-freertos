@@ -999,8 +999,9 @@ OTA_Err_t _AwsIotOTA_InitFileTransfer_HTTP( OTA_AgentContext_t * pAgentCtx )
         OTA_GOTO_CLEANUP();
     }
 
-    IotLogDebug( " Connect to http server ............... ");
+    configPRINT_STRING( ( "Before http connect.\n" ) );
     httpsStatus = _httpConnect( pNetworkInterface, pNetworkCredentials );
+    configPRINT_STRING( ("After http connect\n" ) );
 
     if( httpsStatus != IOT_HTTPS_OK )
     {
