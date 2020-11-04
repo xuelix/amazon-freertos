@@ -660,6 +660,7 @@ static IotHttpsReturnCode_t _httpInitUrl( const char * pURL )
 static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetworkInterface,
                                           struct IotNetworkCredentials * pNetworkCredentials )
 {
+    IotLogDebug(" Inside _httpConnect .....");
     /* HTTP API return status. */
     IotHttpsReturnCode_t httpsStatus = IOT_HTTPS_OK;
 
@@ -677,6 +678,8 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
 
     /* HTTP URL information. */
     _httpUrlInfo_t * pUrlInfo = &_httpDownloader.httpUrlInfo;
+
+    IotLogDebug(" Inside _httpConnect .....pConnectionConfig =  %p pRequest = %p pResponse = %p", pConnectionConfig, pRequest, pResponse);
 
     /* Set the connection configurations. */
     pConnectionConfig->pAddress = pUrlInfo->pAddress;
@@ -879,6 +882,7 @@ static _httpErr _httpGetFileSize( uint32_t * pFileSize )
 /* Performs some pre-checks before requesting a new block. */
 static _httpErr _requestDataBlockPreCheck()
 {
+    IotLogDebug( "Invoking _requestDataBlockPreCheck" );
     _httpErr status = OTA_HTTP_ERR_NONE;
 
     /* Reconnect to the HTTP server if we detect an error when processing the response and a reconnect
@@ -995,6 +999,7 @@ OTA_Err_t _AwsIotOTA_InitFileTransfer_HTTP( OTA_AgentContext_t * pAgentCtx )
         OTA_GOTO_CLEANUP();
     }
 
+    IotLogDebug( " Connect to http server ............... ");
     httpsStatus = _httpConnect( pNetworkInterface, pNetworkCredentials );
 
     if( httpsStatus != IOT_HTTPS_OK )
