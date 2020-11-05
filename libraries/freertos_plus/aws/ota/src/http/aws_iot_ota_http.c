@@ -1215,6 +1215,9 @@ OTA_Err_t _AwsIotOTA_CleanupData_HTTP( OTA_AgentContext_t * pAgentCtx )
     /* Unused parameters. */
     ( void ) pAgentCtx;
 
+    /* Disconnect from the S3 server. */
+    IotHttpsClient_Disconnect( _httpDownloader.httpConnection.connectionHandle );
+
     /* Reset downloader state and progress tracker. */
     _httpDownloader.state = OTA_HTTP_STOPPED;
     _httpDownloader.err = OTA_HTTP_ERR_NONE;
