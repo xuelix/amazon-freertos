@@ -696,6 +696,9 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
         configPRINT_STRING("pResponse is NULL\n");
     }
 
+    IotLogInfo( "url: %s", pUrlInfo->pAddress );
+    IotLogInfo( "url size: %d", pUrlInfo->addressLength );
+
     /* Set the connection configurations. */
     pConnectionConfig->pAddress = pUrlInfo->pAddress;
     pConnectionConfig->addressLen = pUrlInfo->addressLength;
@@ -736,6 +739,7 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
 
     configPRINT_STRING("Invoking IotHttpsClient_Connect\n");
     httpsStatus = IotHttpsClient_Connect( &pConnection->connectionHandle, pConnectionConfig );
+    configPRINT_STRING("Finish IotHttpsClient_Connect\n");
 
     return httpsStatus;
 }
