@@ -180,7 +180,8 @@ typedef enum
 
 typedef enum
 {
-    OTA_HTTP_IDLE = 0,
+    OTA_HTTP_STOPPED = 0,
+    OTA_HTTP_IDLE,
     OTA_HTTP_SENDING_REQUEST,
     OTA_HTTP_WAITING_RESPONSE,
     OTA_HTTP_PROCESSING_RESPONSE
@@ -438,7 +439,7 @@ static void _httpReadReadyCallback( void * pPrivateData,
     char connectionValueStr[ HTTP_HEADER_CONNECTION_VALUE_MAX_LEN ] = { 0 };
 
     /* Return if the job is aborted or stopped. */
-    if( _httpDownloader.pAgentCtx == NULL || _httpDownloader.pAgentCtx->eState == eOTA_AgentState_Stopped )
+    if( _httpDownloader.state == OTA_HTTP_STOPPED )
     {
         return;
     }
@@ -541,7 +542,7 @@ static void _httpResponseCompleteCallback( void * pPrivateData,
     OTA_EventMsg_t eventMsg = { 0 };
 
     /* Bail out if this callback is invoked after the OTA agent is stopped or aborted. */
-    if( _httpDownloader.pAgentCtx == NULL || _httpDownloader.pAgentCtx->eState == eOTA_AgentState_Stopped )
+    if( _httpDownloader.state == OTA_HTTP_STOPPED )
     {
         return;
     }
@@ -1196,7 +1197,7 @@ OTA_Err_t _AwsIotOTA_CleanupData_HTTP( OTA_AgentContext_t * pAgentCtx )
     ( void ) pAgentCtx;
 
     /* Reset downloader state and progress tracker. */
-    _httpDownloader.state = OTA_HTTP_IDLE;
+    _httpDownloader.state = OTA_HTTP_STOPPED;
     _httpDownloader.err = OTA_HTTP_ERR_NONE;
     _httpDownloader.currBlock = 0;
     _httpDownloader.currBlockSize = 0;
