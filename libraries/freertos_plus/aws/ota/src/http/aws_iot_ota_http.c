@@ -290,7 +290,7 @@ static void _httpProcessResponseBody( OTA_AgentContext_t * pAgentCtx,
                                       uint8_t * pHTTPResponseBody,
                                       uint32_t bufferSize )
 {
-    IotLogDebug( "Invoking _httpProcessResponseBody" );
+    configPRINT_STRING( "Invoking _httpProcessResponseBody" );
 
     OTA_EventData_t * pMessage;
     OTA_EventMsg_t eventMsg = { 0 };
@@ -386,7 +386,7 @@ static IotHttpsReturnCode_t _httpReconnect()
 static void _httpAppendHeaderCallback( void * pPrivateData,
                                        IotHttpsRequestHandle_t requestHandle )
 {
-    IotLogDebug( "Invoking _httpAppendHeaderCallback." );
+    configPRINT_STRING( "Invoking _httpAppendHeaderCallback." );
 
     /* Value of the "Range" field in HTTP GET request header, set when requesting the file block. */
     char * pRangeValueStr = ( ( _httpCallbackData_t * ) ( pPrivateData ) )->pRangeValueStr;
@@ -419,7 +419,7 @@ static void _httpReadReadyCallback( void * pPrivateData,
                                     IotHttpsReturnCode_t returnCode,
                                     uint16_t responseStatus )
 {
-    IotLogDebug( "Invoking _httpReadReadyCallback." );
+    configPRINT_STRING( "Invoking _httpReadReadyCallback." );
 
     /* Unused parameters. */
     ( void ) pPrivateData;
@@ -529,7 +529,7 @@ static void _httpResponseCompleteCallback( void * pPrivateData,
                                            IotHttpsReturnCode_t returnCode,
                                            uint16_t responseStatus )
 {
-    IotLogDebug( "Invoking _httpResponseCompleteCallback." );
+    configPRINT_STRING( "Invoking _httpResponseCompleteCallback." );
 
     /* Unused parameters. */
     ( void ) pPrivateData;
@@ -589,7 +589,7 @@ static void _httpErrorCallback( void * pPrivateData,
                                 IotHttpsResponseHandle_t responseHandle,
                                 IotHttpsReturnCode_t returnCode )
 {
-    IotLogDebug( "Invoking _httpErrorCallback." );
+    configPRINT_STRING( "Invoking _httpErrorCallback." );
 
     /* Unused parameters. */
     ( void ) pPrivateData;
@@ -609,7 +609,7 @@ static void _httpConnectionClosedCallback( void * pPrivateData,
                                            IotHttpsConnectionHandle_t connectionHandle,
                                            IotHttpsReturnCode_t returnCode )
 {
-    IotLogDebug( "Invoking _httpConnectionClosedCallback." );
+    configPRINT_STRING( "Invoking _httpConnectionClosedCallback." );
 
     /* Unused parameters. */
     ( void ) pPrivateData;
@@ -662,7 +662,7 @@ static IotHttpsReturnCode_t _httpInitUrl( const char * pURL )
 static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetworkInterface,
                                           struct IotNetworkCredentials * pNetworkCredentials )
 {
-    IotLogDebug(" Inside _httpConnect .....");
+    configPRINT_STRING(" Inside _httpConnect .....");
     /* HTTP API return status. */
     IotHttpsReturnCode_t httpsStatus = IOT_HTTPS_OK;
 
@@ -681,7 +681,7 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
     /* HTTP URL information. */
     _httpUrlInfo_t * pUrlInfo = &_httpDownloader.httpUrlInfo;
 
-    IotLogDebug(" Inside _httpConnect .....pConnectionConfig =  %p pRequest = %p pResponse = %p", pConnectionConfig, pRequest, pResponse);
+    configPRINT_STRING(" Inside _httpConnect .....pConnectionConfig =  %p pRequest = %p pResponse = %p", pConnectionConfig, pRequest, pResponse);
 
     /* Set the connection configurations. */
     pConnectionConfig->pAddress = pUrlInfo->pAddress;
@@ -884,7 +884,7 @@ static _httpErr _httpGetFileSize( uint32_t * pFileSize )
 /* Performs some pre-checks before requesting a new block. */
 static _httpErr _requestDataBlockPreCheck()
 {
-    IotLogDebug( "Invoking _requestDataBlockPreCheck" );
+    configPRINT_STRING( "Invoking _requestDataBlockPreCheck" );
     _httpErr status = OTA_HTTP_ERR_NONE;
 
     /* Reconnect to the HTTP server if we detect an error when processing the response and a reconnect
@@ -926,7 +926,7 @@ static _httpErr _requestDataBlockPreCheck()
 
 OTA_Err_t _AwsIotOTA_InitFileTransfer_HTTP( OTA_AgentContext_t * pAgentCtx )
 {
-    IotLogDebug( "Invoking _AwsIotOTA_InitFileTransfer_HTTP" );
+    configPRINT_STRING( "Invoking _AwsIotOTA_InitFileTransfer_HTTP" );
 
     /* Return status. */
     OTA_Err_t status = kOTA_Err_None;
@@ -1053,7 +1053,7 @@ OTA_Err_t _AwsIotOTA_InitFileTransfer_HTTP( OTA_AgentContext_t * pAgentCtx )
 
 OTA_Err_t _AwsIotOTA_RequestDataBlock_HTTP( OTA_AgentContext_t * pAgentCtx )
 {
-    IotLogDebug( "Invoking _AwsIotOTA_RequestDataBlock_HTTP" );
+    configPRINT_STRING( "Invoking _AwsIotOTA_RequestDataBlock_HTTP" );
 
     /* Return status. */
     OTA_Err_t status = kOTA_Err_None;
@@ -1169,7 +1169,7 @@ OTA_Err_t _AwsIotOTA_DecodeFileBlock_HTTP( uint8_t * pMessageBuffer,
                                            uint8_t ** pPayload,
                                            size_t * pPayloadSize )
 {
-    IotLogDebug( "Invoking _AwsIotOTA_DecodeFileBlock_HTTP" );
+    configPRINT_STRING( "Invoking _AwsIotOTA_DecodeFileBlock_HTTP" );
 
     /* Unused parameters. */
     ( void ) messageSize;
@@ -1190,7 +1190,7 @@ OTA_Err_t _AwsIotOTA_DecodeFileBlock_HTTP( uint8_t * pMessageBuffer,
 
 OTA_Err_t _AwsIotOTA_CleanupData_HTTP( OTA_AgentContext_t * pAgentCtx )
 {
-    IotLogDebug( "Invoking _AwsIotOTA_CleanupData_HTTP" );
+    configPRINT_STRING( "Invoking _AwsIotOTA_CleanupData_HTTP" );
 
     /* Unused parameters. */
     ( void ) pAgentCtx;
