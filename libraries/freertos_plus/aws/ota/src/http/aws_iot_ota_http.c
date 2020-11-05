@@ -663,7 +663,8 @@ static IotHttpsReturnCode_t _httpInitUrl( const char * pURL )
 static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetworkInterface,
                                           struct IotNetworkCredentials * pNetworkCredentials )
 {
-    configPRINT_STRING(" Inside _httpConnect .....");
+    configPRINT_STRING(" Inside _httpConnect .....\n");
+
     /* HTTP API return status. */
     IotHttpsReturnCode_t httpsStatus = IOT_HTTPS_OK;
 
@@ -682,7 +683,18 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
     /* HTTP URL information. */
     _httpUrlInfo_t * pUrlInfo = &_httpDownloader.httpUrlInfo;
 
-    IotLogDebug(" Inside _httpConnect .....pConnectionConfig =  %p pRequest = %p pResponse = %p", pConnectionConfig, pRequest, pResponse);
+    if (pConnectionConfig == NULL)
+    {
+        configPRINT_STRING("pConnectionConfig is NULL\n");
+    }
+    if (pRequest == NULL)
+    {
+        configPRINT_STRING("pRequest is NULL\n");
+    }
+    if (pResponse == NULL)
+    {
+        configPRINT_STRING("pResponse is NULL\n");
+    }
 
     /* Set the connection configurations. */
     pConnectionConfig->pAddress = pUrlInfo->pAddress;
@@ -722,6 +734,7 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
     pRequest->asyncInfo.callbacks.connectionClosedCallback = _httpConnectionClosedCallback;
     pRequest->asyncInfo.pPrivData = ( void * ) ( &_httpDownloader.httpCallbackData );
 
+    configPRINT_STRING("Invoking IotHttpsClient_Connect\n");
     httpsStatus = IotHttpsClient_Connect( &pConnection->connectionHandle, pConnectionConfig );
 
     return httpsStatus;
