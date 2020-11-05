@@ -1468,9 +1468,11 @@ static IotHttpsReturnCode_t _createHttpsConnection( IotHttpsConnectionHandle_t *
 
     /* create() will connect to the server specified in addition to creating other network layer
      *  specific resources. */
+    configPRINT_STRING("creating network connection\n");
     networkStatus = pHttpsConnection->pNetworkInterface->create( &networkServerInfo,
                                                                  pNetworkCredentials,
                                                                  &( pHttpsConnection->pNetworkConnection ) );
+    configPRINT_STRING("done creating network connection\n");
 
     /* Check to see if the network connection succeeded. If it did not succeed,
      * then the output parameter pConnHandle will be used to return NULL and the
@@ -2614,6 +2616,7 @@ IotHttpsReturnCode_t IotHttpsClient_Connect( IotHttpsConnectionHandle_t * pConnH
     }
 
     /* Connect to the server now. Initialize all resources needed for the connection context as well here. */
+    configPRINT_STRING("Invoking _createHttpsConnection\n");
     status = _createHttpsConnection( pConnHandle, pConnInfo );
 
     if( HTTPS_FAILED( status ) )

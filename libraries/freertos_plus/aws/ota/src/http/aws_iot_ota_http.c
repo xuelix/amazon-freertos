@@ -698,6 +698,7 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
 
     IotLogInfo( "url: %s", pUrlInfo->pAddress );
     IotLogInfo( "url size: %d", pUrlInfo->addressLength );
+    IotLogInfo( "url size: %d", pUrlInfo->pathLength );
     vTaskDelay( 100 );
 
     /* Set the connection configurations. */
