@@ -2604,7 +2604,9 @@ IotHttpsReturnCode_t IotHttpsClient_Connect( IotHttpsConnectionHandle_t * pConnH
          * handle is a disconnect state is to call IotHttpsClient_Disconnect(). */
         if( ( *pConnHandle )->isConnected )
         {
+            configPRINT_STRING("Calling IotHttpsClient_Disconnect\n");
             status = IotHttpsClient_Disconnect( *pConnHandle );
+            configPRINT_STRING("Done IotHttpsClient_Disconnect\n");
 
             if( HTTPS_FAILED( status ) )
             {
