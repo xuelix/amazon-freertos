@@ -682,7 +682,7 @@ static IotHttpsReturnCode_t _httpConnect( const IotNetworkInterface_t * pNetwork
     /* HTTP URL information. */
     _httpUrlInfo_t * pUrlInfo = &_httpDownloader.httpUrlInfo;
 
-    configPRINT_STRING(" Inside _httpConnect .....pConnectionConfig =  %p pRequest = %p pResponse = %p", pConnectionConfig, pRequest, pResponse);
+    IotLogDebug(" Inside _httpConnect .....pConnectionConfig =  %p pRequest = %p pResponse = %p", pConnectionConfig, pRequest, pResponse);
 
     /* Set the connection configurations. */
     pConnectionConfig->pAddress = pUrlInfo->pAddress;
