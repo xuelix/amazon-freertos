@@ -360,6 +360,8 @@ static void _httpErrorHandler( uint16_t responseCode )
 /* Helper function to reconnect to the HTTP server. */
 static IotHttpsReturnCode_t _httpReconnect()
 {
+    configPRINT_STRING( ( "Calling http reconnect.\n" ) );
+
     /* HTTP API return status. */
     IotHttpsReturnCode_t httpsStatus = IotHttpsClient_Connect(
         &_httpDownloader.httpConnection.connectionHandle,
